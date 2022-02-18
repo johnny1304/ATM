@@ -5,21 +5,14 @@ import com.ZinkWorks.TechnicalProblem.entities.CurrencyUnit;
 import com.ZinkWorks.TechnicalProblem.repositories.AccountsRepository;
 import com.ZinkWorks.TechnicalProblem.repositories.CurrencyUnitRepository;
 import com.ZinkWorks.TechnicalProblem.service.ATMService;
-import org.aspectj.lang.annotation.Before;
-import org.easymock.Capture;
-import org.easymock.CaptureType;
+
 import org.easymock.EasyMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.Sort;
-
-import java.lang.reflect.Array;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static org.easymock.EasyMock.capture;
-import static org.easymock.EasyMock.newCapture;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ATMServiceTest {

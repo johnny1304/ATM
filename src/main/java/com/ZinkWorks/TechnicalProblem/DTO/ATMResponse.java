@@ -8,7 +8,7 @@ import java.util.List;
 public class ATMResponse {
     private BigDecimal currentBalance;
     private BigDecimal totalAvailableBalance;
-    private List<String> errors = new ArrayList<String>();
+    private List<String> errors = new ArrayList<>();
 
 
     public BigDecimal getCurrentBalance() {

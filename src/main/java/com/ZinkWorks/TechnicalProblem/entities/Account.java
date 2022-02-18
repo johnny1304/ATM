@@ -1,9 +1,5 @@
 package com.ZinkWorks.TechnicalProblem.entities;
 
-
-import org.hibernate.annotations.ColumnDefault;
-import org.springframework.boot.context.properties.bind.DefaultValue;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;

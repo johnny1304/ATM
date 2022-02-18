@@ -1,6 +1,5 @@
 package com.ZinkWorks.TechnicalProblem.repositories;
 
-import com.ZinkWorks.TechnicalProblem.entities.Account;
 import com.ZinkWorks.TechnicalProblem.entities.CurrencyUnit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

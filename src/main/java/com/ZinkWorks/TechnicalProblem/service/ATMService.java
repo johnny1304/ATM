@@ -7,8 +7,6 @@ import com.ZinkWorks.TechnicalProblem.repositories.CurrencyUnitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -24,11 +22,7 @@ public class ATMService {
         Optional<Account> account = accountsRepository.findById(userId);
         if (account.isPresent()) {
             Account userAccount = account.get();
-            if (userPin.equals(userAccount.getUserPin())) {
-                return true;
-            } else {
-                return false;
-            }
+            return userPin.equals(userAccount.getUserPin());
         } else {
             return false;
         }
@@ -45,12 +39,7 @@ public class ATMService {
 
     public BigDecimal getTotalAvailableAmount(String userId) {
         Optional<Account> account = accountsRepository.findById(userId);
-        if (account.isPresent()) {
-            BigDecimal totalBalance = account.get().getOpeningBalance().add(account.get().getOverdraft());
-            return totalBalance;
-        } else {
-            return BigDecimal.ZERO;
-        }
+        return account.map(value -> value.getOpeningBalance().add(value.getOverdraft())).orElse(BigDecimal.ZERO);
     }
 
     public List<Integer> cashWithDraw(String userId,BigDecimal amount) throws Exception{
@@ -76,11 +65,11 @@ public class ATMService {
 
     private List<Integer> calculateNotes(BigDecimal amount) throws Exception {
         List<CurrencyUnit> availableNotesList = currencyUnitRepository.findAll(Sort.by(Sort.Direction.DESC, "unit"));
-        List<Integer> finalNotesList= new ArrayList<Integer>();
+        List<Integer> finalNotesList= new ArrayList<>();
         Integer total = 0;
         for(int i=0;i<availableNotesList.size();i++) {
             total = 0;
-            finalNotesList = new ArrayList<Integer>();
+            finalNotesList = new ArrayList<>();
             availableNotesList = resetAvailableCurrencies(availableNotesList, i);
             for (int j=i;j<availableNotesList.size();j++) {
                 CurrencyUnit unit = availableNotesList.get(j);
@@ -93,7 +82,7 @@ public class ATMService {
             if (total.equals(amount.intValue())) {break;}
         }
         if (total.equals(amount.intValue())) {
-            availableNotesList.stream().forEach(t -> System.out.println(t.getQuantity()));
+            availableNotesList.forEach(t -> System.out.println(t.getQuantity()));
             currencyUnitRepository.saveAll(availableNotesList);
             System.out.println(finalNotesList);
             return finalNotesList;
@@ -109,11 +98,7 @@ public class ATMService {
 
     private Boolean isValidAmount(BigDecimal amount) {
         Integer minCurrencyUnit = currencyUnitRepository.getMinimumCurrencyUnit();
-        if (amount.intValue() > 0 && amount.remainder(new BigDecimal(minCurrencyUnit)).equals(BigDecimal.ZERO)) {
-            return true;
-        } else {
-            return false;
-        }
+        return amount.intValue() > 0 && amount.remainder(new BigDecimal(minCurrencyUnit)).equals(BigDecimal.ZERO);
 
     }
 

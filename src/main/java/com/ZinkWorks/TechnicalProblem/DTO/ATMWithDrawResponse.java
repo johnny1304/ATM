@@ -5,8 +5,8 @@ import java.util.*;
 
 public class ATMWithDrawResponse {
     private BigDecimal balance;
-    private List<Integer> noteList = new ArrayList<Integer>() ;
-    private List<String> errors = new ArrayList<String>();
+    private List<Integer> noteList = new ArrayList<>() ;
+    private List<String> errors = new ArrayList<>();
 
     public BigDecimal getBalance() {
         return balance;
