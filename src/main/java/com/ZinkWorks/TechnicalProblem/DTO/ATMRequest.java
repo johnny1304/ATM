@@ -14,30 +14,6 @@ public class ATMRequest {
     private String userPin;
     private BigDecimal amount;
 
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserPin() {
-        return userPin;
-    }
-
-    public void setUserPin(String userPin) {
-        this.userPin = userPin;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
     @Override
     public String toString() {
         return "ATMRequest{" +
